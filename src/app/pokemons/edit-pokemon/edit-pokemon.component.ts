@@ -1,0 +1,35 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import * as e from 'express';
+import { Pokemon } from '../pokemon';
+import { PokemonService } from '../pokemon.service';
+
+@Component({
+  selector: 'app-edit-pokemon',
+  template: `
+      <h2 class="center">Editer {{pokemon?.name}}</h2>
+      <p *ngIf="pokemon" class="center">
+          <img [src]="pokemon.picture" alt="">
+      </p>
+      <app-pokemon-form *ngIf="pokemon" [pokemon]="pokemon"></app-pokemon-form>>
+  `,
+  styles: [
+  ]
+})
+export class EditPokemonComponent implements OnInit {
+
+  pokemon:Pokemon | undefined
+
+  constructor(private pokemonService:PokemonService,private router:ActivatedRoute) { }
+
+  ngOnInit(): void {
+    const pokemonId = this.router.snapshot.paramMap.get('id')
+    if (pokemonId) {
+      this.pokemonService.getPokemonById(+pokemonId).subscribe(pokemon => this.pokemon=pokemon)    }
+    else{
+      this.pokemon = undefined
+    }
+
+  }
+
+}
