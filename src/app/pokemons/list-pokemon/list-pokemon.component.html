@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" >
     <div class="row">
         <div *ngFor="let pokemon of pokemonList" class="col m4 s6">
                 <div (click)="goToPokemon(pokemon)" class="card horizontal" appPokemonBorderCard>
@@ -17,4 +17,5 @@
                 </div>                   
         </div>
     </div>
+    <button class="waves-effect waves-light btn-large" routerLink="ajout/pokemon">Ajouter Pokemon</button>
 </div>
